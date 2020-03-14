@@ -13,7 +13,13 @@ app.use(express.static('public'));
 // });
 app.use(express.json({ limit: '1mb' }));
 // POST method route
-app.post('/api', (req, res) => {
-  console.log(req.body);
-  res.send('POST request to the homepage');
+app.post('/api', (request, response) => {
+  console.log('I got request');
+  console.log(request.body);
+  const data = request.body;
+  response.json({
+    status: 'success',
+    Latitude: data.lat,
+    Longtitude: data.lon
+  });
 });
