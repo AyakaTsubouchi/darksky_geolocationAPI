@@ -26,12 +26,13 @@ const getLoc = () => {
     navigator.geolocation.getCurrentPosition(async position => {
       const lat = position.coords.latitude;
       const lon = position.coords.longitude;
+      const activity = document.getElementById('activity').value;
       marker.setLatLng([lat, lon]);
       map.setView([lat, lon], 13);
       document.getElementById('lat').innerHTML = lat;
       document.getElementById('lon').innerHTML = lon;
 
-      const data = { lat, lon };
+      const data = { lat, lon, activity };
       const option = {
         method: 'POST',
         headers: {
@@ -47,4 +48,19 @@ const getLoc = () => {
     console.log('geolocation IS NOT available');
   }
 };
+
+const activityLog = () => {
+  const activityList = [];
+  const data = fetch('../database.db');
+  console.log(data);
+};
+const database =
+  '/Users/ayaka/OneDrive/AyakaProgramming/WIL/2javascript/darkSky-geolocateAPI/database.db';
+async function getdata() {
+  const response = await fetch(database);
+  const data = await response.json();
+  console.log(data);
+}
+
 getLoc();
+// getdata();
