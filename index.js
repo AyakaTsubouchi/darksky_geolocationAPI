@@ -18,6 +18,18 @@ app.use(express.json({ limit: '1mb' }));
 const database = new Datastore('database.db');
 database.loadDatabase();
 
+//GET method route
+app.get('/api', (request, response) => {
+  // Find all documents in the collection
+  database.find({}, (err, data) => {
+    if (err) {
+      response.end();
+      return;
+    }
+    response.json(data);
+  });
+});
+
 // POST method route
 app.post('/api', (request, response) => {
   console.log('I got request');
