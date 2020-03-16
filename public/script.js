@@ -32,6 +32,13 @@ const getLoc = () => {
       document.getElementById('lat').innerHTML = lat;
       document.getElementById('lon').innerHTML = lon;
 
+      //Dark Sky API
+
+      const api_url = `weather/${lat},${lon}`;
+      const response2 = await fetch(api_url);
+      const json2 = await response2.json();
+      console.log(json2);
+
       const data = { lat, lon, activity };
       const option = {
         method: 'POST',
